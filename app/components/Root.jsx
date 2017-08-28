@@ -6,22 +6,25 @@ export default class Root extends Component {
     super()
   }
 
-  componentDidMount() {
+  componentDidMount () {
   }
 
   render() {
+    const campuses = this.state.campuses;
     return (
-      <Router>
-        <div>
+      <div>
+        <h1>HELLO</h1>
+        {/* <Router>
           <Navbar />
           <Switch>
+            <Route exact path="/home" component={AllCampuses} />
             <Route exact path="/campuses" component={AllCampuses} />
             <Route exact path="/campuses/campusId" component={SingleCampus} />
-            <Route exact path="/students" component={AllStudent} />
+            <Route exact path="/students" component={AllStudents} />
             <Route exact path="/students/studentId" component={SingleStudent} />
           </ Switch>
-        </div>
-      </Router>
+        </Router> */}
+      </div>
     )
   }
 }
