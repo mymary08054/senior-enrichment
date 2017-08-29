@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default class AllStudents extends Component {
     constructor() {
@@ -19,7 +21,8 @@ export default class AllStudents extends Component {
         const students = this.state.students;
         return (
             <div>
-                <h3>Albums</h3>
+                <h3>Students</h3>
+                <button className="btn btn-default" type="submit">New Student</button>
                 <div className="row">
                     {
                         students.map(student => (
@@ -30,7 +33,6 @@ export default class AllStudents extends Component {
                                         <h5>
                                             <span>{student.name}</span>
                                         </h5>
-                                        <small>{student.songs.length} songs</small>
                                     </div>
                                 </Link>
                             </div>

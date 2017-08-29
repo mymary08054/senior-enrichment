@@ -14,9 +14,5 @@ module.exports = db.define('student', {
         validate: {
             isEmail: true,
         }
-    },
-    campus: {
-        type: DataTypes.STRING,
-        allowNull: false
     }
 })
