@@ -6,12 +6,18 @@ import SingleCampus from "./SingleCampus";
 import AllStudents from "./AllStudents";
 import SingleStudent from "./SingleStudent";
 
+import store, {fetchStudents, fetchCampuses} from "../store";
+
 export default class Root extends Component {
   constructor() {
     super()
   }
 
-  componentDidMount() {
+  componentDidMount () {
+    const studentsThunk = fetchStudents();
+    const campusesThunk = fetchCampuses();
+    store.dispatch(studentsThunk);
+    store.dispatch(campusesThunk);
   }
 
   render() {
