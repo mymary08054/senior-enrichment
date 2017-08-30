@@ -41,6 +41,7 @@ export default function reducer(students = [], action) {
 /* ------------   THUNK CREATORS     ------------------ */
 
 export const fetchStudents = () => dispatch => {
+  console.log("FEATCH CLICK");
   axios.get('/api/students')
     .then(res => dispatch(init(res.data)))
     .catch(err => console.error('Fetching students unsuccessful', err));
