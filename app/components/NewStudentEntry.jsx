@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addStudent, writeStudentName } from '../store';
+import history from '../history';
 
 function NewStudentEntry(props) {
 
@@ -37,12 +38,7 @@ function NewStudentEntry(props) {
                     </select>
                 </div>
             </div>
-            <div className="form-group">
-                <div className="col-xs-10 col-xs-offset-2">
-                    <button type="submit" className="btn btn-success">Add Campus</button>
-                </div>
-            </div>
-
+            {/* Warning msg about empty fields */}
             <div className="form-group">
                 <button type="submit" className="btn btn-default">Create Student</button>
             </div>

@@ -53,15 +53,20 @@ export const fetchCampus = (id) => dispatch => {
 };
 
 // optimistic
-export const removeCampus = id => dispatch => {
+export const removeCampus = (id, history) => dispatch => {
   dispatch(remove(id));
   axios.delete(`/api/campuses/${id}`)
     .catch(err => console.error(`Removing campus: ${id} unsuccessful`, err));
+  // history.push('/campuses');
 };
 
-export const addCampus = campus => dispatch => {
+export const addCampus = (campus, history) => dispatch => {
   axios.post('/api/campuses', campus)
-    .then(res => dispatch(create(res.data)))
+    .then(res => {
+      console.log("YOU CANDOIT", res.data);
+      dispatch(create(res.data));
+      history.push(`./campuses/${res.data.id}`);
+    })
     .catch(err => console.error(`Creating campus: ${campus} unsuccessful`, err));
 };
 

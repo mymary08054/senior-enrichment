@@ -2,41 +2,53 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { postMessage, writeMessage } from '../store';
 import { withRouter, NavLink } from 'react-router-dom';
+import {removeCampus} from '../store';
 
 function SingleCampus(props) {
 
-  const { campus, students } = props;
+  const { campuses, students, handleDelete } = props;
+  const campusName = campuses.map((campu) => { return campu.name })
+  const campusId = campuses.map((campu) => { return campu.id })
 
   return (
     <div>
-    <h1> {campus.map((campu) => { return campu.name })} </h1>
-    <ul>
-      {
-        students.map((student) => {
-          return (
-            <li key={student.id}>{student.name}</li>
-          )
-        })
-      }
-    </ul>
+      <h1> {campusName} </h1>
+      <ul>
+        {
+          students.map((student) => {
+            return (
+              <li key={student.id}>{student.name}</li>
+            )
+          })
+        }
+      </ul>
+      <div>
+        <button
+          className="btn btn-default btn-xs"
+          onClick={() => handleDelete(campusId)}>
+          <span className="glyphicon glyphicon-remove" />
+        </button>
+      </div>
     </div>
-    // <form id="new-message-form" onSubmit={evt => handleSubmit(name, newMessageEntry, evt)}>
-    //   <div className="input-group input-group-lg">
-    //     <span className="input-group-btn">
-    //     </span>
-    //   </div>
-    // </form>
   );
 }
 
 const mapStateToProps = function (state, ownProps) {
   const campusId = ownProps.match.params.campusId;
   return {
-    campus: state.campuses.filter(campus => {
+    campuses: state.campuses.filter(campus => {
       return campus.id == campusId
     }),
     students: state.students.filter(student => student.campusId == campusId)
   };
 };
 
-export default withRouter(connect(mapStateToProps)(SingleCampus));
+const mapDispatchToProps = function (dispatch, ownProps) {
+  return {
+    handleDelete(campusId) {
+      dispatch(removeCampus(campusId, ownProps.history))
+    }
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleCampus));
