@@ -7,25 +7,25 @@ function SingleCampus(props) {
 
   const { campus, students } = props;
 
-  console.log("RETURN", campus)
-
   return (
-    <form id="new-message-form" onSubmit={evt => handleSubmit(name, newMessageEntry, evt)}>
-      <div className="input-group input-group-lg">
-        <span className="input-group-btn">
-          <h1> {campus.map((campu) => { return campu.name })} </h1>
-           <ul>
-            {
-               students.map((student) => {
-                return (
-                  <li key={student.id}>{student.name}</li>
-                )
-              }) 
-            }
-          </ul> 
-        </span>
-      </div>
-    </form>
+    <div>
+    <h1> {campus.map((campu) => { return campu.name })} </h1>
+    <ul>
+      {
+        students.map((student) => {
+          return (
+            <li key={student.id}>{student.name}</li>
+          )
+        })
+      }
+    </ul>
+    </div>
+    // <form id="new-message-form" onSubmit={evt => handleSubmit(name, newMessageEntry, evt)}>
+    //   <div className="input-group input-group-lg">
+    //     <span className="input-group-btn">
+    //     </span>
+    //   </div>
+    // </form>
   );
 }
 

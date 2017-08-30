@@ -1,16 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // import { postMessage, writeMessage } from '../store';
+import { withRouter, NavLink } from 'react-router-dom';
 
-export default function SingleStudent (props) {
+function SingleStudent (props) {
 
+  const { students } = props;
   return (
-    <form id="new-message-form" onSubmit={evt => handleSubmit(name, newMessageEntry, evt)}>
-      <div className="input-group input-group-lg">
-        <span className="input-group-btn">
-          <button className="btn btn-default" type="submit">Chat!</button>
-        </span>
+    <div>
+    <h1>{
+      students.map((stud) => {
+      return stud.name
+      })}</h1>
       </div>
-    </form>
   );
 }
+
+const mapStateToProps = function (state, ownProps) {
+  const studentId = ownProps.match.params.studentId;
+  return {
+    students: state.students.filter(student => {
+      return student.id == studentId
+    })
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(SingleStudent));

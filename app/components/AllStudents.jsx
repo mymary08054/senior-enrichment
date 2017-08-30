@@ -10,7 +10,9 @@ function AllStudents(props) {
     return (
         <div>
             <h3>Students</h3>
+            <Link to='/new-student'>
             <button className="btn btn-default" type="submit">New Student</button>
+            </Link>
             <div className="row">
                 {
                     students.map(student => (

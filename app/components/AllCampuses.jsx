@@ -11,7 +11,9 @@ function AllCampuses(props) {
         <div>
             <h3>Campuses</h3>
             <span className="input-group-btn">
+                <Link to={`/new-campus`}>
                 <button className="btn btn-default" type="submit">Create New Campus</button>
+                </Link>
             </span>
             <div className="row">
                 {
