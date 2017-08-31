@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 // import { postMessage, writeMessage } from '../store';
 import { withRouter, NavLink } from 'react-router-dom';
 
-function SingleStudent (props) {
+function SingleStudent(props) {
 
   const { students } = props;
   return (
     <div>
-    <h1>{
-      students.map((stud) => {
-      return stud.name
-      })}</h1>
-      </div>
+      <h1>{
+        students.map((stud) => {
+          return stud.name
+        })}</h1>
+    </div>
   );
 }
 

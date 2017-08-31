@@ -26,6 +26,10 @@ export default function reducer(campuses = [], action) {
       return [action.campus, ...campuses];
 
     case REMOVE_CAMPUS:
+      console.log("REM", campuses.filter(campus => {
+        console.log("IDs", campus.id !== action.id, campus.id, action.id);
+        campus.id !== action.id
+      }));
       return campuses.filter(campus => campus.id !== action.id);
 
     case UPDATE_CAMPUS:
@@ -57,13 +61,12 @@ export const removeCampus = (id, history) => dispatch => {
   dispatch(remove(id));
   axios.delete(`/api/campuses/${id}`)
     .catch(err => console.error(`Removing campus: ${id} unsuccessful`, err));
-  // history.push('/campuses');
+  history.push('/campuses');
 };
 
 export const addCampus = (campus, history) => dispatch => {
   axios.post('/api/campuses', campus)
     .then(res => {
-      console.log("YOU CANDOIT", res.data);
       dispatch(create(res.data));
       history.push(`./campuses/${res.data.id}`);
     })

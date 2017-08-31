@@ -7,9 +7,8 @@ import {removeCampus} from '../store';
 function SingleCampus(props) {
 
   const { campuses, students, handleDelete } = props;
-  const campusName = campuses.map((campu) => { return campu.name })
-  const campusId = campuses.map((campu) => { return campu.id })
-
+  const campusName = campuses.map((campu) => { return campu.name })[0]
+  const campusId = campuses.map((campu) => { return campu.id })[0]
   return (
     <div>
       <h1> {campusName} </h1>
