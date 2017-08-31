@@ -1,22 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // import { postMessage, writeMessage } from '../store';
-import { withRouter, NavLink } from 'react-router-dom';
-import {removeCampus} from '../store';
+import { withRouter, Link } from 'react-router-dom';
+import { removeCampus } from '../store';
 
 function SingleCampus(props) {
 
   const { campuses, students, handleDelete } = props;
-  const campusName = campuses.map((campu) => { return campu.name })[0]
-  const campusId = campuses.map((campu) => { return campu.id })[0]
+
   return (
     <div>
-      <h1> {campusName} </h1>
+       <h1> {campuses && campuses.name} </h1>
+       <img src={campuses && campuses.image} /> 
       <ul>
         {
-          students.map((student) => {
+          students && students.map((student) => {
             return (
-              <li key={student.id}>{student.name}</li>
+              <Link to={`/students/${student.id}`}>
+                <li key={student.id}>{student.name}</li>
+              </Link>
             )
           })
         }
@@ -24,10 +26,10 @@ function SingleCampus(props) {
       <div>
         <button
           className="btn btn-default btn-xs"
-          onClick={() => handleDelete(campusId)}>
+          onClick={() => handleDelete(campuses && campuses.id)}>
           <span className="glyphicon glyphicon-remove" />
         </button>
-      </div>
+      </div> 
     </div>
   );
 }
@@ -35,7 +37,7 @@ function SingleCampus(props) {
 const mapStateToProps = function (state, ownProps) {
   const campusId = ownProps.match.params.campusId;
   return {
-    campuses: state.campuses.filter(campus => {
+    campuses: state.campuses.find(campus => {
       return campus.id == campusId
     }),
     students: state.students.filter(student => student.campusId == campusId)

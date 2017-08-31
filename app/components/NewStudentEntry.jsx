@@ -1,26 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addStudent, writeStudentName } from '../store';
+import {
+    addStudent,
+    writeStudentName,
+    writeEmailName,
+    writeEmailError
+} from '../store';
 import history from '../history';
 
 function NewStudentEntry(props) {
 
-    const { newStudentEntry, campuses, handleSubmit, handleChange } = props;
+    const {
+        newStudentEntry,
+        campuses,
+        emailError,
+        newEmailEntry,
+        handleSubmit,
+        handleChangeName,
+        handleChangeEmail
+     } = props;
 
     return (
         <form onSubmit={handleSubmit}>
             {/* Student Name */}
             <div className="form-group">
-                <label htmlFor="name">Create a Student</label>
+                <label htmlFor="name">Student Name: </label>
                 <input
                     value={newStudentEntry}
-                    onChange={handleChange}
+                    onChange={handleChangeName}
                     className="form-control"
                     type="text"
                     name="studentName"
                     placeholder="Enter student name"
                 />
             </div>
+            {/* Email */}
+            <div className="form-group">
+                <label htmlFor="name">Email: </label>
+                <input
+                    value={newEmailEntry}
+                    onChange={handleChangeEmail}
+                    className="form-control"
+                    type="text"
+                    name="studentEmail"
+                    placeholder="Enter Email"
+                />
+            </div>
+            {emailError && <div className="alert alert-danger">Song is a duplicate</div>}
             {/* Campus */}
             <div className="form-group">
                 <label htmlFor="campus" className="col-xs-2 control-label">Campus</label>
@@ -29,7 +55,7 @@ function NewStudentEntry(props) {
                         className="form-control"
                         name="campus"
                         required
-                        onChange={handleChange}>
+                    >
                         {
                             campuses && campuses.map(campus => (
                                 <option key={campus.id} value={campus.id}>{campus.name}</option>
@@ -49,21 +75,33 @@ function NewStudentEntry(props) {
 const mapStateToProps = function (state) {
     return {
         newStudentEntry: state.newStudentEntry,
-        campuses: state.campuses
+        campuses: state.campuses,
+        emailError: state.newEmailError,
+        newEmailEntry: state.newEmailEntry
     };
 };
 
 const mapDispatchToProps = function (dispatch, ownProps) {
     return {
-        handleChange(evt) {
+        handleChangeName(evt) {
+            console.log("WHAT HAPPENED HERE", evt.target.value)
             dispatch(writeStudentName(evt.target.value));
+        },
+        handleChangeEmail(evt) {
+            console.log("WHAT HAPPENED HERE!!!", evt.target.value)
+            dispatch(writeEmailName(evt.target.value));
+            dispatch(writeEmailError(false));
         },
         handleSubmit(evt) {
             evt.preventDefault();
             const name = evt.target.studentName.value;
+            const email = evt.target.studentEmail.value;
             const campusId = evt.target.campus.value;
-            dispatch(addStudent({ name: name, campusId: campusId }, ownProps.history));
-            dispatch(writeStudentName(''));
+            const addStudentDispatch = addStudent({ name: name, email: email, campusId: campusId }, ownProps.history)
+            dispatch(addStudentDispatch)
+                .catch(err => {
+                    dispatch(writeEmailError(true))
+                })
         }
     };
 };

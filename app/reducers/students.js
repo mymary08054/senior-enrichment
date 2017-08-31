@@ -41,7 +41,6 @@ export default function reducer(students = [], action) {
 /* ------------   THUNK CREATORS     ------------------ */
 
 export const fetchStudents = () => dispatch => {
-  console.log("FEATCH CLICK");
   axios.get('/api/students')
     .then(res => dispatch(init(res.data)))
     .catch(err => console.error('Fetching students unsuccessful', err));
@@ -61,12 +60,12 @@ export const removeStudent = id => dispatch => {
 };
 
 export const addStudent = (student, history) => dispatch => {
-  axios.post('/api/students', student)
+  return axios.post('/api/students', student)
     .then(res => {
       dispatch(create(res.data))
-      history.push(`/students/${student.id}`);
+      history.push(`/students/${res.data.id}`);
     })
-    .catch(err => console.error(`Creating student: ${student} unsuccessful`, err));
+    // .catch(err => console.error(`Creating student: ${student} unsuccessful`, err));
 };
 
 export const updateStudent = (id, student) => dispatch => {

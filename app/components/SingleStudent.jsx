@@ -1,17 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // import { postMessage, writeMessage } from '../store';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 function SingleStudent(props) {
 
-  const { students } = props;
+  const { student, campuses } = props;
+  const studentName = student && student.name;
+  const studentEmail = student && student.email;
+  const studentCampusId = student && student.campusId;
+  const campus = campuses.find(campus => {
+    return campus.id == studentCampusId
+  })
   return (
     <div>
-      <h1>{
-        students.map((stud) => {
-          return stud.name
-        })}</h1>
+      <h1>{studentName}</h1>
+      <h3>{studentEmail}</h3>
+      <Link to={`/campuses/${campus && campus.id}`}>
+      {campus && campus.name}
+      </Link>
     </div>
   );
 }
@@ -19,9 +26,10 @@ function SingleStudent(props) {
 const mapStateToProps = function (state, ownProps) {
   const studentId = ownProps.match.params.studentId;
   return {
-    students: state.students.filter(student => {
+    student: state.students.find(student => {
       return student.id == studentId
-    })
+    }),
+    campuses: state.campuses
   };
 };
 

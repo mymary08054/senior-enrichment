@@ -9,3 +9,5 @@ export * from './reducers/campuses';
 export * from './reducers/students';
 export * from './reducers/newCampusEntry';
 export * from './reducers/newStudentEntry';
+export * from './reducers/newEmailEntry';
+export * from './reducers/newEmailError';
