@@ -27,7 +27,7 @@ export default class Root extends Component {
   render() {
     return (
       <div>
-        <h1>HELLOOOO</h1>
+        <h1>Interplanetary Academy</h1>
         <Router>
           <div>
             <Navbar />
