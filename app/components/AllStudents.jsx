@@ -57,7 +57,7 @@ function AllStudents(props) {
                                             <button
                                                 className="btn btn-default btn-xs"
                                                 onClick={() => removeStudent(student.id)}>
-                                                <span className="glyphicon glyphicon-remove" />
+                                                x
                                             </button>
                                         </div>
                                     </td>

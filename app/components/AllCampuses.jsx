@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 
 function AllCampuses(props) {
+    console.log("ALLAAMADSDASASDA")
     const  {campuses} = props;
     return (
         <div>

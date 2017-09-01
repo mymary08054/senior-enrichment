@@ -7,6 +7,8 @@ import NewCampusEntry from "./NewCampusEntry";
 import AllStudents from "./AllStudents";
 import SingleStudent from "./SingleStudent";
 import NewStudentEntry from "./NewStudentEntry";
+import EditStudent from "./EditStudent";
+import EditCampus from "./EditCampus";
 
 import store, {fetchStudents, fetchCampuses} from "../store";
 
@@ -33,6 +35,7 @@ export default class Root extends Component {
               <Route exact path="/home" component={AllCampuses} />
               <Route exact path="/campuses" component={AllCampuses} />
               <Route exact path="/new-campus" component={NewCampusEntry} />
+               <Route exact path="/edit-campus/:campusId" component={EditCampus} /> 
               <Route exact path="/campuses/:campusId" component={SingleCampus} />
               <Route exact path="/students" component={AllStudents} />
               <Route exact path="/students/:studentId" component={SingleStudent} />

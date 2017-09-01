@@ -10,8 +10,8 @@ function SingleCampus(props) {
 
   return (
     <div>
-       <h1> {campuses && campuses.name} </h1>
-       <img src={campuses && campuses.image} /> 
+      <h1> {campuses && campuses.name} </h1>
+      <img src={campuses && campuses.image} />
       <ul>
         {
           students && students.map((student) => {
@@ -27,9 +27,17 @@ function SingleCampus(props) {
         <button
           className="btn btn-default btn-xs"
           onClick={() => handleDelete(campuses && campuses.id)}>
-          <span className="glyphicon glyphicon-remove" />
+          Delete
         </button>
-      </div> 
+      </div>
+      <div>
+        <Link to={`/edit-campus/${campuses && campuses.id}`}>
+        <button
+          className="btn btn-default btn-xs">
+          Edit
+        </button>
+        </Link>
+      </div>
     </div>
   );
 }

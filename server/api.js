@@ -25,8 +25,14 @@ api.post('/campuses', function (req, res, next) {
 });
 
 api.put('/campuses/:campusId', function (req, res, next) {
-	Campus.update(req.body, { where: { id: req.params.campusId } })
-		.then(campus => res.status(200).json(campus))
+	Campus.update(req.body, {
+		where: { id: req.params.campusId },
+		returning: true,
+		plain: true
+	})
+		.then(campus => {
+			return res.status(200).json(campus)
+		})
 		.catch(next);
 });
 
